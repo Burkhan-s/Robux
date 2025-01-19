@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рулетка наград</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🎁 Рулетка наград</h1>
+        <p>Крути рулетку, выигрывай робуксы и забирай свои призы!</p>
+    </header>
+
+    <main>
+        <section id="roulette-section">
+            <div id="roulette-wheel">
+                <div id="wheel">
+                </div>
+            </div>
+            <button id="start-roulette">🎡 Запустить рулетку</button>
+            <div id="roulette-result" class="hidden">
+                <h2>🎉 Вы выиграли <span id="prize-amount"></span> робуксов!</h2>
+                <button id="claim-prize">Забрать награду</button>
+            </div>
+        </section>
+
+        <section id="recent-winners">
+            <h2>🎖️ Последние победители</h2>
+            <ul id="winners-list"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Рулетка наград. Все права защищены.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

